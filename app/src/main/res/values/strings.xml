@@ -8,15 +8,11 @@
     <string name="incorrect_toast">Неверно</string>
     <string name="button_next">Далее</string>
     <string name="button_prev">Назад</string>
-    <string name="question_oceans">The Pacific Ocean is larger than
-the Atlantic Ocean.</string>
-    <string name="question_mideast">The Suez Canal connects the Red Sea
-and the Indian Ocean.</string>
-    <string name="question_africa">The source of the Nile River is in Egypt.
+    <string name="question_oceans">Тихий океан больше Атлантического океана.</string>
+    <string name="question_mideast">Суэльский канал соединяет красное море и индийский океан.</string>
+    <string name="question_africa">Исток реки Нил находится в Египте.
 </string>
-    <string name="question_americas">The Amazon River is the longest river
-in the Americas.</string>
-    <string name="question_asia">Lake Baikal is the world\’s oldest and deepest
-freshwater lake.</string>
+    <string name="question_americas">Амазонка самая большая река в америке.</string>
+    <string name="question_asia">Озеро Байкал это старейшее и глубочайшее озеро на планете.</string>
 
 </resources>
