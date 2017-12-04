@@ -9,12 +9,46 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
+    private ImageButton mNextButton;
+    private ImageButton mPrevButton;
+    private TextView mQuestionTextView;
+
+    private Question[] mQuestionBank = new Question[]{
+            new Question(R.string.question_oceans, true),
+            new Question(R.string.question_mideast, false),
+            new Question(R.string.question_africa, false),
+            new Question(R.string.question_americas, true),
+            new Question(R.string.question_asia, true),
+    };
+
+    private int mCurrentIndex = 0;
+
+    private void updateQuestion() {
+        if (mCurrentIndex > mQuestionBank.length - 1) {
+            Toast.makeText(this, "Вопросы кончились!", Toast.LENGTH_SHORT).show();
+            mCurrentIndex--;
+        }
+        int question = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(question);
+    }
+
+    private void checkAnswer(boolean userPressedTrue) {
+        if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressedTrue) {
+            Toast.makeText(this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+        }
+        mCurrentIndex++;
+        updateQuestion();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,22 +57,47 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mQuestionTextView = findViewById(R.id.question_text_view);
+
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
+        mNextButton = findViewById(R.id.next_button);
+        mPrevButton = findViewById(R.id.prev_button);
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+                checkAnswer(true);
             }
         });
 
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+                checkAnswer(false);
             }
         });
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCurrentIndex++;
+                updateQuestion();
+            }
+        });
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCurrentIndex == 0) {
+                    Toast.makeText(MainActivity.this, "Это первый вопрос!", Toast.LENGTH_SHORT).show();
+                } else {
+                    mCurrentIndex--;
+                    updateQuestion();
+                }
+            }
+        });
+
+        updateQuestion();
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
