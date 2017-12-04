@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Question</string>
+    <string name="action_settings">Settings</string>
+    <string name="question_text">Вопрос</string>
+    <string name="button_true">Правда</string>
+    <string name="button_false">Ложь</string>
+    <string name="correct_toast">Верно</string>
+    <string name="incorrect_toast">Неверно</string>
+</resources>
